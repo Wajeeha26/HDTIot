@@ -1,11 +1,21 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
-class User(models.Model):
-    uid = models.CharField(max_length=255, unique=True)  # Firebase UID
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    role = models.CharField(max_length=20, choices=[('patient', 'Patient'), ('doctor', 'Doctor')])
+class UserManager(BaseUserManager):
+    def create_user(self, uid, email, role):
+        if not email:
+            raise ValueError("Users must have an email address")
+        user = self.model(uid=uid, email=self.normalize_email(email), role=role)
+        user.save(using=self._db)
+        return user
 
-    def __str__(self):
-        return self.email
+class User(AbstractBaseUser, PermissionsMixin):
+    uid = models.CharField(max_length=255, unique=True)
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=20, choices=[('patient', 'Patient'), ('doctor', 'Doctor')])
+    date_joined = models.DateTimeField(auto_now_add=True)
+    
+    objects = UserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['uid']
+
