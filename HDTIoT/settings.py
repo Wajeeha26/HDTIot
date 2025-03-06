@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 import firebase_admin
 from firebase_admin import credentials
@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'HDTIoT.urls'
-AUTHENTICATION_BACKENDS = ["users.auth.FirebaseAuthentication"]
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 TEMPLATES = [
     {
@@ -106,7 +106,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-DATABASE_ROUTERS = ["users.db_router.DatabaseRouter"]
+#DATABASE_ROUTERS = ["users.db_router.DatabaseRouter"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -145,4 +145,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = "accounts.User"
