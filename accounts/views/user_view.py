@@ -1,31 +1,62 @@
-from django.shortcuts import render
+import logging
+
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
+from accounts.api_schema.user_apiview import USER_API
 from accounts.models.user_model import User
+from openapi_schema_validator import validate
+
+from utilities.log_utils import log_request
+from utilities.response_utils import handle_api_exception, api_success_response
+
+logger = logging.getLogger(__name__)
+
 
 class UserAPIViewSet(APIView):
     
-    def get(self, request, uid=None):
-        if uid is None:
-            return Response({"error": "User ID is required"}, status=status.HTTP_400_BAD_REQUEST)
-        try:
-            user = User.objects.get(uid=uid)
-            return Response({"uid": user.uid, "email": user.email, "role": user.role})
-        except User.DoesNotExist:
-            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
-    
-    def post(self, request):
+    def get(self, request):
+        """
+        API to get user details
+        :param request: HTTP Request
+        :returns: User details
+        """
+        # Get logs Extras
+        extras = log_request(request, logger=logger, api_name=USER_API.get("GET").get("api_name"))
 
-        
         try:
-            data = request.data
-            user = User.objects.create_user(uid=data['uid'], email=data['email'], role=data['role'])
-            return Response({"message": "User created", "uid": user.uid}, status=status.HTTP_201_CREATED)
+
+            # Validate request
+            validate(request.body, USER_API.get("GET").get("schema"))
+
+
+            uid = request.query_params.get('uid')
+
+            user = User.objects.get(uid=uid)
+            logger.info(f"Fetching details for user: {uid}", extra=extras)
+
+            user_data = {
+                "uid": user.uid,
+                "email": user.email,
+                "role": user.role
+            }
+            return api_success_response(status_code=status.HTTP_200_OK, message="Success",
+                                        data=user_data, extras=extras)
+
+        except ValidationError as e:
+            return handle_api_exception(exception=e, status_code=status.HTTP_400_BAD_REQUEST,
+                                        message="Validation Error", extras=extras, logger_obj=logger)
+
         except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return handle_api_exception(exception=e, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                        message="Internal Server Error", extras=extras, logger_obj=logger)
+
     
-    def put(self, request, uid=None):
+    def put(self, request):
+        uid = request.data.get('uid')
         if uid is None:
             return Response({"error": "User ID is required"}, status=status.HTTP_400_BAD_REQUEST)
         try:
