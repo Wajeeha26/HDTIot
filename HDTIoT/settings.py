@@ -90,17 +90,17 @@ WSGI_APPLICATION = 'HDTIoT.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "global_db",
+        "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "anas12345",
+        "PASSWORD": "admin",
         "HOST": "localhost",
         "PORT": "5432",
     },
-    "regional": {
+    "global": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "regional_db",
+        "NAME": "global",
         "USER": "postgres",
-        "PASSWORD": "anas12345",
+        "PASSWORD": "admin",
         "HOST": "localhost",
         "PORT": "5432",
     },
@@ -151,58 +151,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.User"
-
-import os
-from pathlib import Path
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{asctime} {levelname} {message}",
-            "style": "{",
-        }
-    },
-    "filters": {
-        "require_debug_true": {
-            "()": "django.utils.log.RequireDebugTrue",
-        },
-    },
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "filters": ["require_debug_true"],
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "formatter": "verbose",
-            "filename": "../logs/django.log",
-        },
-        "logstash": {  
-            "level": "INFO",
-            "class": "logstash.TCPLogstashHandler",
-            "host": "127.0.0.1",  # Change if Logstash runs elsewhere
-            "port": 5959,  # Same as in logstash.conf
-            "version": 1,
-            "message_type": "django",
-            "formatter": "verbose",
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console", "file", "logstash"], 
-            "level": "INFO",
-            "propagate": True,
-        },
-    },
-}
 
 JSON_RESPONSE = {
     'data': '',
