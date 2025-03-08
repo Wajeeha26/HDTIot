@@ -3,9 +3,12 @@ import json
 
 from django.http import JsonResponse
 
-from HDTIoT.settings import JSON_RESPONSE
+from HDTIoT.settings import JSON_RESPONSE, SUCCESS_CODES
 from utilities.log_utils import log_exception
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 def make_response(response_code: int, message: str, data: any = None):
     """
@@ -34,17 +37,17 @@ def make_response(response_code: int, message: str, data: any = None):
 
 
 def handle_api_exception(exception: any, status_code: int, message: str,
-                         extras: object, logger: object):
+                         extras: object, logger_obj: object):
     """
     Helper function to handle logging and response for any api exception
     """
-    log_exception(logger, extras)
+    log_exception(logger_obj, extras)
 
     # Construct response
     response = make_response(status_code, message)
 
     # Format log message
-    logger.info(f"{message}. Exception: {exception}. Returning Response: {json.dumps(response)}")
+    logger_obj.info(f"{message}. Exception: {exception}. Returning Response: {json.dumps(response)}")
 
     # Update extras with response and status code
     extras.update({

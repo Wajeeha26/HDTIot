@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import requests
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -65,6 +67,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'HDTIoT.urls'
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'HDTIoT.authentication.BaseAuth',
+    ),
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -106,7 +114,16 @@ DATABASES = {
     },
 }
 
-
+CACHES = {
+    # "default": {
+    #     "BACKEND": "django.core.cache.backends.redis.RedisCache",
+    #     "LOCATION": REDIS_HOST,
+    # }
+    'default': {
+        'BACKEND': 'django_prometheus.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -128,6 +145,58 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS Policies
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'region',
+    'fb-access-token',
+    'id_token',
+    'device-id',
+    'device-type',
+    'Authorization',
+    'Access-Control-Allow-Origin',
+    'access-control-allow-origin',
+    'Region',
+    'Device-Id',
+    'Device-Type'
+]
+
+CORS_EXPOSE_HEADERS = [
+    'Authorization',
+    'authorization',
+    'Region'
+]
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = 'same-origin'
+
+EXCLUDE_AUTH_ENDPOINTS = []
+
+ALLOWED_REQUEST_METHODS = {
+    'get': requests.get,
+    'post': requests.post,
+    'patch': requests.patch,
+    'put': requests.put
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
