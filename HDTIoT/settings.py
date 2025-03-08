@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ['*']
 
 import firebase_admin
 from firebase_admin import credentials
+from rest_framework import status
 
 # Load Firebase credentials
 FIREBASE_CRED = credentials.Certificate("hdtiot-firebase-adminsdk-fbsvc-5a99dfed18.json")
@@ -146,3 +147,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.User"
+
+JSON_RESPONSE = {
+    'data': '',
+    'message': '',
+    'status_code': 200
+}
+
+SUCCESS_CODES = [
+    status.HTTP_200_OK,
+    status.HTTP_202_ACCEPTED,
+    status.HTTP_203_NON_AUTHORITATIVE_INFORMATION,
+    status.HTTP_204_NO_CONTENT]
