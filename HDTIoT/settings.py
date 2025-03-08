@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['*']
 
 import firebase_admin
@@ -35,6 +36,7 @@ from rest_framework import status
 FIREBASE_CRED = credentials.Certificate("hdtiot-firebase-adminsdk-fbsvc-5a99dfed18.json")
 firebase_admin.initialize_app(FIREBASE_CRED)
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,11 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "rest_framework",
-    "accounts",
+    'rest_framework',
+    'accounts',
+    'django_prometheus',
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,6 +151,58 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.User"
+
+import os
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} {levelname} {message}",
+            "style": "{",
+        }
+    },
+    "filters": {
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "formatter": "verbose",
+            "filename": "../logs/django.log",
+        },
+        "logstash": {  
+            "level": "INFO",
+            "class": "logstash.TCPLogstashHandler",
+            "host": "127.0.0.1",  # Change if Logstash runs elsewhere
+            "port": 5959,  # Same as in logstash.conf
+            "version": 1,
+            "message_type": "django",
+            "formatter": "verbose",
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file", "logstash"], 
+            "level": "INFO",
+            "propagate": True,
+        },
+    },
+}
 
 JSON_RESPONSE = {
     'data': '',
