@@ -7,6 +7,6 @@ app_name = "accounts"
 urlpatterns = [
     path('user/', UserAPIViewSet.as_view(), name='user-create'), 
     path('user/<str:uid>/', UserAPIViewSet.as_view(), name='user-detail'),  
-    path('chatbot/<str:uid>/', ChatbotView.as_view(), name='chatbot-history'),  # ✅ GET User chat history
-    path('chatbot/', ChatbotView.as_view(), name='chatbot-chat'),  # ✅ POST New chat
+    path('chatbot/<str:uid>/', ChatbotView.as_view(), name='chatbot-history'),
+    path('chatbot/', ChatbotView.as_view(), name='chatbot-chat'),
 ]
