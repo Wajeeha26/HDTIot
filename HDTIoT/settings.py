@@ -25,7 +25,16 @@ SECRET_KEY = 'django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ['*']
+
+import firebase_admin
+from firebase_admin import credentials
+from rest_framework import status
+
+# Load Firebase credentials
+FIREBASE_CRED = credentials.Certificate("hdtiot-firebase-adminsdk-fbsvc-5a99dfed18.json")
+firebase_admin.initialize_app(FIREBASE_CRED)
 
 
 # Application definition
@@ -176,7 +185,7 @@ LOGGING = {
             "formatter": "verbose",
             "filename": "../logs/django.log",
         },
-        "logstash": {  # ✅ NEW: Logstash handler
+        "logstash": {  
             "level": "INFO",
             "class": "logstash.TCPLogstashHandler",
             "host": "127.0.0.1",  # Change if Logstash runs elsewhere
@@ -188,9 +197,21 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console", "file", "logstash"],  # ✅ Include Logstash
+            "handlers": ["console", "file", "logstash"], 
             "level": "INFO",
             "propagate": True,
         },
     },
 }
+
+JSON_RESPONSE = {
+    'data': '',
+    'message': '',
+    'status_code': 200
+}
+
+SUCCESS_CODES = [
+    status.HTTP_200_OK,
+    status.HTTP_202_ACCEPTED,
+    status.HTTP_203_NON_AUTHORITATIVE_INFORMATION,
+    status.HTTP_204_NO_CONTENT]
