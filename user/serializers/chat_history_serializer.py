@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models.chat_history_model import ChatHistory
+from user.models.chat_history_model import ChatHistory
 
 class ChatHistorySerializer(serializers.ModelSerializer):
     class Meta:

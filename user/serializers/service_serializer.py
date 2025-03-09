@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models.service_model import Service, UserServices
+from user.models.service_model import Service, UserServices
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:

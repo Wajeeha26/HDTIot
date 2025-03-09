@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
+from user.utils import is_valid_email
+
+
 class UserManager(BaseUserManager):
     def create_user(self, uid, email, first_name, last_name, user_type=1, is_deleted=0, password=None):
         if not email:
@@ -25,3 +28,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.first_name
+
+    def update_email(self, email):
+        if is_valid_email(email):
+            self.email = email
+
+    def update_name(self, first_name, last_name):
+        self.first_name = first_name or self.first_name
+        self.last_name = last_name or self.last_name

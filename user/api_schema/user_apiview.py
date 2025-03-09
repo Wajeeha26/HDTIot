@@ -14,9 +14,11 @@ USER_API = {
         "schema": {
             "type": "object",
             "properties": {
-                "uid": {"type": "string"},
+                "email": {"type": "string", "format": "email"},
+                "first_name": {"type": "string", "minLength": 2, "maxLength": 50},
+                "last_name": {"type": "string", "minLength": 2, "maxLength": 50},
             },
-            "required": ["uid"],
+            "required": [],
         }
     },
     "DELETE": {

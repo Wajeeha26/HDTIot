@@ -19,6 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('user/', include('user.urls', namespace='user')),
     path('', include('django_prometheus.urls')),  
 ]

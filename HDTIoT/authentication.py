@@ -5,7 +5,7 @@ from firebase_admin import auth
 import logging
 
 from HDTIoT.settings import EXCLUDE_AUTH_ENDPOINTS
-from accounts.models import User
+from user.models import User
 
 logger = logging.getLogger(__name__)
 
@@ -60,8 +60,8 @@ class FirebaseAuthentication(BaseAuthentication):
             # Set user on the request
             logger.info(f"User Found: {user.id}", extra=extras)
 
-            if not check_user_access(user, request):
-                raise AuthenticationFailed('User not authorized')
+            # if not check_user_access(user, request):
+            #     raise AuthenticationFailed('User not authorized')
 
             return_tuple = (user, None)
             return return_tuple

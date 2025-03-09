@@ -11,7 +11,7 @@ class Service(models.Model):
 
 class UserService(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey("accounts.User", to_field="uid", on_delete=models.CASCADE)  # References uid
+    user = models.ForeignKey("user.User", to_field="uid", on_delete=models.CASCADE)  # References uid
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
 
     def __str__(self):

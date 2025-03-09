@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models.device_model import Device, UserDevice
+from user.models.device_model import Device, UserDevice
 
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
