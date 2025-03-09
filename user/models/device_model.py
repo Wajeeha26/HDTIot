@@ -10,6 +10,6 @@ class Device(models.Model):
 
 class UserDevice(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey("accounts.User", to_field="uid", on_delete=models.CASCADE)  # References uid
+    user = models.ForeignKey("user.User", to_field="uid", on_delete=models.CASCADE)  # References uid
     device_uuid = models.TextField(null=True, blank=True)
     device_type = models.ForeignKey(Device, on_delete=models.CASCADE)
