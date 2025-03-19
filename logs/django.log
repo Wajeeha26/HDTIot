@@ -1,0 +1,75 @@
+2025-03-19 12:32:34,519 INFO Watching for file changes with StatReloader
+2025-03-19 12:36:58,770 INFO Watching for file changes with StatReloader
+2025-03-19 12:42:17,398 INFO Watching for file changes with StatReloader
+2025-03-19 12:43:19,695 INFO Watching for file changes with StatReloader
+2025-03-19 12:54:39,114 INFO Watching for file changes with StatReloader
+2025-03-19 13:29:00,688 INFO Watching for file changes with StatReloader
+2025-03-19 13:48:11,332 INFO Watching for file changes with StatReloader
+2025-03-19 13:51:44,648 INFO Watching for file changes with StatReloader
+2025-03-19 13:55:06,594 INFO Watching for file changes with StatReloader
+2025-03-19 14:08:12,568 WARNING Not Found: /user/
+2025-03-19 14:08:12,572 WARNING "POST /user/ HTTP/1.1" 404 2621
+2025-03-19 14:13:10,254 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:13:10,256 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 79
+2025-03-19 14:16:35,369 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:16:35,371 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:16:55,862 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:16:55,864 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:17:07,971 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:17:07,973 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:21:09,252 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:21:09,253 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:21:11,234 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:21:11,236 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:21:13,133 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:21:13,135 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:21:31,123 INFO Watching for file changes with StatReloader
+2025-03-19 14:21:40,920 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:21:40,922 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:21:43,036 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:21:43,038 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 18
+2025-03-19 14:23:13,985 INFO C:\Users\wajee\OneDrive\Desktop\healthcare\HDTIot\accounts\views\user_view.py changed, reloading.
+2025-03-19 14:23:21,928 INFO Watching for file changes with StatReloader
+2025-03-19 14:23:36,686 INFO Watching for file changes with StatReloader
+2025-03-19 14:23:44,129 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:23:44,132 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:27:01,325 INFO Watching for file changes with StatReloader
+2025-03-19 14:27:14,912 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:27:14,916 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
+2025-03-19 14:27:32,220 INFO C:\Users\wajee\OneDrive\Desktop\healthcare\HDTIot\accounts\views\user_view.py changed, reloading.
+2025-03-19 14:27:38,407 INFO Watching for file changes with StatReloader
+2025-03-19 14:32:34,857 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:32:34,860 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:33:04,888 INFO Watching for file changes with StatReloader
+2025-03-19 14:33:46,531 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:33:46,534 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:36:21,883 INFO C:\Users\wajee\OneDrive\Desktop\healthcare\HDTIot\accounts\views\user_view.py changed, reloading.
+2025-03-19 14:36:27,825 INFO Watching for file changes with StatReloader
+2025-03-19 14:39:19,214 INFO Watching for file changes with StatReloader
+2025-03-19 14:40:08,725 INFO C:\Users\wajee\OneDrive\Desktop\healthcare\HDTIot\accounts\views\user_view.py changed, reloading.
+2025-03-19 14:40:14,582 INFO Watching for file changes with StatReloader
+2025-03-19 14:40:25,971 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:40:25,977 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
+2025-03-19 14:44:42,938 INFO Watching for file changes with StatReloader
+2025-03-19 14:45:10,867 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:45:10,869 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:45:17,849 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:45:17,849 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 102
+2025-03-19 14:45:23,938 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:45:23,939 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:48:46,851 INFO Watching for file changes with StatReloader
+2025-03-19 14:49:46,217 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:49:46,219 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:49:47,615 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:49:47,616 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 107
+2025-03-19 14:51:49,100 INFO Watching for file changes with StatReloader
+2025-03-19 14:52:00,359 WARNING Bad Request: /api/accounts/user/
+2025-03-19 14:52:00,361 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
+2025-03-19 14:57:32,754 INFO Watching for file changes with StatReloader
+2025-03-19 15:04:25,399 WARNING Bad Request: /api/accounts/user/
+2025-03-19 15:04:25,403 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
+2025-03-19 15:05:17,863 WARNING Bad Request: /api/accounts/user/
+2025-03-19 15:05:17,865 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
+2025-03-19 15:19:20,419 INFO Watching for file changes with StatReloader
+2025-03-19 15:19:51,534 WARNING Bad Request: /api/accounts/user/
+2025-03-19 15:19:51,538 WARNING "POST /api/accounts/user/ HTTP/1.1" 400 224
