@@ -13,4 +13,4 @@ class UserChat(models.Model):
         return f"Chat {self.chat.id} - User {self.user.uid}"
 
     class Meta:
-        db_table = 'user_chat'
+        db_table = "user_chat"

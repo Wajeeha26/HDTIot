@@ -7,7 +7,7 @@ USER_API = {
                 "uid": {"type": "string"},
             },
             "required": ["uid"],
-        }
+        },
     },
     "PUT": {
         "api_name": "[PUT: user/]",
@@ -15,11 +15,13 @@ USER_API = {
             "type": "object",
             "properties": {
                 "email": {"type": "string", "format": "email"},
-                "first_name": {"type": "string", "minLength": 2, "maxLength": 50},
-                "last_name": {"type": "string", "minLength": 2, "maxLength": 50},
+                "first_name": {"type": "string", "minLength": 2,
+                                "maxLength": 50},
+                "last_name": {"type": "string", "minLength": 2,
+                               "maxLength": 50},
             },
             "required": [],
-        }
+        },
     },
     "DELETE": {
         "api_name": "[DELETE: user/]",
@@ -29,6 +31,6 @@ USER_API = {
                 "uid": {"type": "string"},
             },
             "required": ["uid"],
-        }
-    }
+        },
+    },
 }

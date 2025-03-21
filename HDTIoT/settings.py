@@ -22,76 +22,76 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@'
+SECRET_KEY = "django-insecure-b)e*1jx5*506kt3k37%_&o*m8*m%t#)b&y^!6a4x*t&cg&&m)@"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 import firebase_admin
 from firebase_admin import credentials
 from rest_framework import status
 
 # Load Firebase credentials
-FIREBASE_CRED = credentials.Certificate("hdtiot-firebase-adminsdk-fbsvc-5a99dfed18.json")
+FIREBASE_CRED = credentials.Certificate(
+    "hdtiot-firebase-adminsdk-fbsvc-5a99dfed18.json"
+)
 firebase_admin.initialize_app(FIREBASE_CRED)
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'user',
-    'chat',
-    'services',
-    'django_prometheus',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "user",
+    "chat",
+    "services",
+    "django_prometheus",
 ]
 
 MIDDLEWARE = [
-    'django_prometheus.middleware.PrometheusBeforeMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'HDTIoT.urls'
+ROOT_URLCONF = "HDTIoT.urls"
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'HDTIoT.authentication.BaseAuth',
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("HDTIoT.authentication.BaseAuth",),
 }
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'HDTIoT.wsgi.application'
+WSGI_APPLICATION = "HDTIoT.wsgi.application"
 
 
 # Database
@@ -121,91 +121,87 @@ CACHES = {
     #     "BACKEND": "django.core.cache.backends.redis.RedisCache",
     #     "LOCATION": REDIS_HOST,
     # }
-    'default': {
-        'BACKEND': 'django_prometheus.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+    "default": {
+        "BACKEND": "django_prometheus.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
     }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-#DATABASE_ROUTERS = ["users.db_router.DatabaseRouter"]
+# DATABASE_ROUTERS = ["users.db_router.DatabaseRouter"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 # CORS Policies
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'region',
-    'fb-access-token',
-    'id_token',
-    'device-id',
-    'device-type',
-    'Authorization',
-    'Access-Control-Allow-Origin',
-    'access-control-allow-origin',
-    'Region',
-    'Device-Id',
-    'Device-Type'
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "region",
+    "fb-access-token",
+    "id_token",
+    "device-id",
+    "device-type",
+    "Authorization",
+    "Access-Control-Allow-Origin",
+    "access-control-allow-origin",
+    "Region",
+    "Device-Id",
+    "Device-Type",
 ]
 
-CORS_EXPOSE_HEADERS = [
-    'Authorization',
-    'authorization',
-    'Region'
-]
+CORS_EXPOSE_HEADERS = ["Authorization", "authorization", "Region"]
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_REFERRER_POLICY = 'same-origin'
+SECURE_REFERRER_POLICY = "same-origin"
 
 EXCLUDE_AUTH_ENDPOINTS = []
 
 ALLOWED_REQUEST_METHODS = {
-    'get': requests.get,
-    'post': requests.post,
-    'patch': requests.patch,
-    'put': requests.put
+    "get": requests.get,
+    "post": requests.post,
+    "patch": requests.patch,
+    "put": requests.put,
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -215,22 +211,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
 
-JSON_RESPONSE = {
-    'data': '',
-    'message': '',
-    'status_code': 200
-}
+JSON_RESPONSE = {"data": "", "message": "", "status_code": 200}
 
 SUCCESS_CODES = [
     status.HTTP_200_OK,
     status.HTTP_202_ACCEPTED,
     status.HTTP_203_NON_AUTHORITATIVE_INFORMATION,
-    status.HTTP_204_NO_CONTENT]
+    status.HTTP_204_NO_CONTENT,
+]
