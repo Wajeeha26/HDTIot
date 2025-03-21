@@ -1,14 +1,14 @@
 import copy
 import json
+import logging
 
 from django.http import JsonResponse
 
 from HDTIoT.settings import JSON_RESPONSE, SUCCESS_CODES
 from utilities.log_utils import log_exception
 
-import logging
-
 logger = logging.getLogger(__name__)
+
 
 def make_response(response_code: int, message: str, data: any = None):
     """
@@ -17,7 +17,7 @@ def make_response(response_code: int, message: str, data: any = None):
     :param message: response message
     :param data: response data
     """
-    method_name = '[MAKE_RESPONSE]'
+    method_name = "[MAKE_RESPONSE]"
     extras = {"endpoint": f"{method_name}", "user": ""}
     try:
         response = copy.deepcopy(JSON_RESPONSE)
@@ -36,8 +36,9 @@ def make_response(response_code: int, message: str, data: any = None):
         return {"data": "No response data available"}
 
 
-def handle_api_exception(exception: any, status_code: int, message: str,
-                         extras: object, logger_obj: object):
+def handle_api_exception(
+    exception: any, status_code: int, message: str, extras: object, logger_obj: object
+):
     """
     Helper function to handle logging and response for any api exception
     """
@@ -47,20 +48,20 @@ def handle_api_exception(exception: any, status_code: int, message: str,
     response = make_response(status_code, message)
 
     # Format log message
-    logger_obj.info(f"{message}. Exception: {exception}. Returning Response: {json.dumps(response)}")
+    logger_obj.info(
+        f"{message}. Exception: {exception}. Returning Response: {json.dumps(response)}"
+    )
 
     # Update extras with response and status code
-    extras.update({
-        'response': json.dumps(response),
-        'status_code': status_code
-    })
+    extras.update({"response": json.dumps(response), "status_code": status_code})
 
     # Return JSON response
     return JsonResponse(response, status=status_code)
 
 
-def api_success_response(status_code: int, message: str, data: object = None,
-                         extras: object = None):
+def api_success_response(
+    status_code: int, message: str, data: object = None, extras: object = None
+):
     """
     Helper function to return success response
     :param status_code: status code
