@@ -1,4 +1,4 @@
-from accounts.models.organization_model import Organization
+from user.models.organization_model import Organization
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response

@@ -1,61 +1,54 @@
-import json
-import logging
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from chat.models.chat import Chat, ChatHistory
+from chat.utils import train_epigenetic_clock
+from chat.ai_agent import get_response_from_ai_agent
+from rest_framework.permissions import AllowAny
 
-from django.http import JsonResponse
-from django.views import View
+chat_history = {}
 
-from user.models.user import User
-from user.models.user_chat import UserChat
+ALLOWED_MODEL_NAMES = [
+    "llama3-70b-8192",
+    "mixtral-8x7b-32768",
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant"
+]
 
-logger = logging.getLogger("chatbot")
-
-
-def generate_chatbot_response(prompt):
-    return f"Bot: I received your message - '{prompt}'"
-
-
-class Chat(View):
-    """Handles chatbot interactions"""
-
-    def get(self, request, uid):
-        """Retrieve chat history for a user"""
-        try:
-            user = User.objects.get(uid=uid)
-            chats = UserChat.objects.filter(user=user).values(
-                "id", "prompt", "response", "created_at"
-            )
-            return JsonResponse(list(chats), safe=False, status=200)
-        except User.DoesNotExist:
-            return JsonResponse({"error": "User not found"}, status=404)
-
+class ChatEndpoint(APIView):
+    permission_classes = [AllowAny]
     def post(self, request):
-        """Save a new user chat and generate a bot response"""
+        model_name = request.data.get('model_name')
+        messages = request.data.get('messages', [])
+        allow_search = request.data.get('allow_search', False)
+        system_prompt = request.data.get('system_prompt', 'Act as an AI chatbot who is smart and friendly')
+        session_id = request.data.get('session_id')
+
+        if model_name not in ALLOWED_MODEL_NAMES:
+            return Response({"error": "Invalid model name"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if session_id not in chat_history:
+            chat_history[session_id] = []
+        
+        chat_history[session_id].extend(messages)
+
+        query = chat_history[session_id]
+        response = get_response_from_ai_agent(model_name, query, allow_search, system_prompt)
+        
+        chat_history[session_id].append(response)
+
+        return Response({"response": response, "session_id": session_id})
+
+
+class EpigeneticAgeEndpoint(APIView):
+    def post(self, request):
+        file = request.FILES.get('file')
+
+        if not file:
+            return Response({"error": "No file uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
-            data = json.loads(request.body)
-            uid = data["uid"]
-            prompt = data["prompt"]
-
-            user = User.objects.get(uid=uid)
-            response = generate_chatbot_response(prompt)  # Mock response
-
-            user_chat = UserChat.objects.create(
-                user=user, prompt=prompt, response=response
-            )
-
-            return JsonResponse(
-                {
-                    "id": user_chat.id,
-                    "uid": user_chat.user.uid,
-                    "prompt": user_chat.prompt,
-                    "response": user_chat.response,
-                    "created_at": user_chat.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-                },
-                status=201,
-            )
-
-        except User.DoesNotExist:
-            return JsonResponse({"error": "User not found"}, status=404)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON data"}, status=400)
+            result = train_epigenetic_clock(file)
+            return Response(result, status=status.HTTP_200_OK)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
