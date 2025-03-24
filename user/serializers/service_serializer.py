@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user.models.service_model import Service, UserServices
+from user.models.service_model import Service, UserService
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -11,5 +11,5 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 class UserServicesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserServices
+        model = UserService
         fields = "__all__"

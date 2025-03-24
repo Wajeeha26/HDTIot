@@ -1,5 +1,6 @@
 from django.urls import path
 
+from user.views.organization import OrganizationAPIView
 from user.views.signup import CreateUserAPIView
 from user.views.user import UserAPIViewSet
 

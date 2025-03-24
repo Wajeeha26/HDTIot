@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "user",
     "chat",
-    "services",
     "django_prometheus",
 ]
 
@@ -102,7 +101,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "admin",
+        "PASSWORD": "anas12345",
         "HOST": "localhost",
         "PORT": "5432",
     },
@@ -110,7 +109,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "global",
         "USER": "postgres",
-        "PASSWORD": "admin",
+        "PASSWORD": "anas12345",
         "HOST": "localhost",
         "PORT": "5432",
     },
@@ -227,3 +226,11 @@ SUCCESS_CODES = [
     status.HTTP_203_NON_AUTHORITATIVE_INFORMATION,
     status.HTTP_204_NO_CONTENT,
 ]
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")

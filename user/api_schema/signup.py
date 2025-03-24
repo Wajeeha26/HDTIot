@@ -4,12 +4,14 @@ SIGNUP_API = {
         "schema": {
             "type": "object",
             "properties": {
+                "uid": {"type": "string"},
                 "email": {"type": "string"},
                 "first_name": {"type": "string"},
                 "last_name": {"type": "string"},
+                "user_type": {"type": "integer", "default": 1},
+                "is_deleted": {"type": "integer", "default": 0},
             },
-            "required": ["email", "first_name", "last_name", 
-                         "user_type", "is_deleted"],
+            "required": ["uid", "email", "first_name", "last_name"],
         },
     }
 }
